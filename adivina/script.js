@@ -136,53 +136,38 @@ fetch('personajes.json')
   }
   
   function enviarRespuestasJson() {
-    fetch('personajes.json')
-      .then(response => response.json())
-      .then(data => {
-      
-        const personajes = data;
+    const nuevoPersonaje = {
+      nombre: nuevoNombre,
+      hombre: userAnswers[0],
+      mujer: userAnswers[1],
+      es_estudiante: userAnswers[2],
+      es_profesor: userAnswers[3],
+      es_mago_oscuro: userAnswers[4],
+      es_muggle: userAnswers[5],
+      es_personaje_principal: userAnswers[6],
+      es_personaje_secundario: userAnswers[7]
+    };
   
-        const nuevoPersonaje = {
-          nombre: nuevoNombre,
-          hombre: userAnswers[0], 
-          mujer: userAnswers[1], 
-          es_estudiante: userAnswers[2],
-          es_profesor: userAnswers[3], 
-          es_mago_oscuro: userAnswers[4], 
-          es_muggle: userAnswers[5], 
-          es_personaje_principal: userAnswers[6], 
-          es_personaje_secundario: userAnswers[7]
-        };
-  
-        
-        personajes.push(nuevoPersonaje);
-  
-        
-        const nuevoContenido = JSON.stringify(personajes, null, 2);
-  
-        
-        fetch('personajes.json', {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: nuevoContenido
-        })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Error al actualizar el archivo personajes.json');
-            }
-            console.log('El archivo personajes.json se ha actualizado correctamente.');
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-      })
-      .catch(error => {
-        console.error('Error al cargar el archivo personajes.json:', error);
-      });
+    fetch('http://localhost:3000/agregar_personaje', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(nuevoPersonaje)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al agregar el nuevo personaje');
+      }
+      console.log('El nuevo personaje se ha agregado correctamente.');
+      // Reiniciar el juego u realizar otras acciones si es necesario
+      reiniciarJuego();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   }
-
+  
   yesBtn.addEventListener('click', () => {
     nextQuestion(true); 
   });
