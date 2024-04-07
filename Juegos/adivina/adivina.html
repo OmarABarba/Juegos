@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina quien</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Griffy&family=Workbench:SCAN@-15&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1>Adivina Quién de Harry Potter</h1>
+    <p>¿Podré adivinar quién es el personaje secreto?</p>
+</div>
+<div class="container2">
+<img id="personaje" src="/adivina/imagenes/adivina quien.jpg" alt="Personajes">
+</div>
+
+    <div class="container3">
+        <p>Piensa en un personaje de las saga de Harry Potter y responderé algunas preguntas para adivinar quién es.</p>
+        <div id="question" class="question"></div>
+        <div id="resultElement"></div>
+        <div class="options">
+        <button id="yesBtn" class="btn">Sí</button>
+        <button id="noBtn" class="btn">No</button>
+        </div>
+    </div>
+
+    <script src="/adivina/personajes.json"></script>
+    <script src="/adivina/script.js"></script>
+    
+</body>
+</html>
