@@ -25,7 +25,7 @@ fetch('personajes.json')
     let nombreValues =[];
     let igualIndex = -1;
     let bad = 0;
-    
+    let nuevoNombre = '';
 
     function askQuestion() {
       questionElement.textContent = questions[currentQuestionIndex];
@@ -107,7 +107,7 @@ fetch('personajes.json')
     } else {
       console.log("Ninguna matriz fue igual.");
     
-      const nuevoNombre = prompt("No se encontró ninguna coincidencia. Por favor, ingrese el nombre del personaje correspondiente:");
+      nuevoNombre = prompt("No se encontró ninguna coincidencia. Por favor, ingrese el nombre del personaje correspondiente:");
 
       if (nuevoNombre) {
         
@@ -117,7 +117,7 @@ fetch('personajes.json')
         resultElement.textContent = `El personaje que coincide con las respuestas del usuario es: ${nuevoNombre}`;
         const questionsContainer = document.getElementById('questionsContainer');
         questionElement.style.display = 'none';
-        userAnswers.unshift(true);
+        // userAnswers.unshift(true);
         console.log(userAnswers);
         enviarRespuestasJson();
         // reiniciarJuego();
@@ -136,25 +136,51 @@ fetch('personajes.json')
   }
   
   function enviarRespuestasJson() {
-    const dataToSend = {
-      userAnswers: userAnswers 
-    };
-    fetch('guardar_respuestas.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataToSend)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Error al enviar los datos al servidor.');
-      }
-      console.log('Los datos se han enviado exitosamente al servidor.');
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+    fetch('personajes.json')
+      .then(response => response.json())
+      .then(data => {
+      
+        const personajes = data;
+  
+        const nuevoPersonaje = {
+          nombre: nuevoNombre,
+          hombre: userAnswers[0], 
+          mujer: userAnswers[1], 
+          es_estudiante: userAnswers[2],
+          es_profesor: userAnswers[3], 
+          es_mago_oscuro: userAnswers[4], 
+          es_muggle: userAnswers[5], 
+          es_personaje_principal: userAnswers[6], 
+          es_personaje_secundario: userAnswers[7]
+        };
+  
+        
+        personajes.push(nuevoPersonaje);
+  
+        
+        const nuevoContenido = JSON.stringify(personajes, null, 2);
+  
+        
+        fetch('personajes.json', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: nuevoContenido
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Error al actualizar el archivo personajes.json');
+            }
+            console.log('El archivo personajes.json se ha actualizado correctamente.');
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      })
+      .catch(error => {
+        console.error('Error al cargar el archivo personajes.json:', error);
+      });
   }
 
   yesBtn.addEventListener('click', () => {
