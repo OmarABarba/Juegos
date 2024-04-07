@@ -10,11 +10,11 @@ app.use(bodyParser.json());
 app.post('/agregar_personaje', (req, res) => {
   const nuevoPersonaje = req.body;
 
-  fs.readFile('personajes.json', 'utf8', (err, data) => {
+fs.readFile('personajes.json', 'utf8', (err, data) => {
     if (err) {
-      console.error(err);
-      res.status(500).send('Error al leer el archivo JSON');
-      return;
+    console.error(err);
+    res.status(500).send('Error al leer el archivo JSON');
+    return;
     }
 
     let personajes = JSON.parse(data);

@@ -1,11 +1,9 @@
-// Cargar el archivo JSON
+// Una vez que el archivo JSON está cargado, trabajamos con los datos
 fetch('personajes.json')
   .then(response => response.json())
   .then(data => {
-    // Una vez que el archivo JSON está cargado, trabajamos con los datos
     const characters = data;
     let currentQuestionIndex = 0;
-
     const questions = [
       "¿Es hombre?",
       "¿Es mujer?",
@@ -16,12 +14,9 @@ fetch('personajes.json')
       "¿Es un personaje principal?",
       "¿Es un personaje secundario?"
     ];
-
     const questionElement = document.getElementById('question');
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
-    
-
     let userAnswers = []; 
     let characterValues = [];
     let nombreValues =[];
@@ -44,148 +39,134 @@ fetch('personajes.json')
     }
     
     function evaluateCharacter() {
-      
-    const userResponses = userAnswers;
-    console.log("Respuestas del usuario:", userResponses);
-    
+      const userResponses = userAnswers;
+      console.log("Respuestas del usuario:", userResponses);
 
-    characters.forEach(character => {
-      let values = [
-        character.hombre,
-        character.mujer,
-        character.es_estudiante,
-        character.es_profesor,
-        character.es_mago_oscuro,
-        character.es_muggle,
-        character.es_personaje_principal,
-        character.es_personaje_secundario
-      ];
-      let nombres = [
-        character.nombre
-      ];
-      nombreValues.push(nombres)
-      characterValues.push(values);
-      console.log(characterValues);
-      console.log(nombreValues);
-    });
+      characters.forEach(character => {
+        let values = [
+          character.hombre,
+          character.mujer,
+          character.es_estudiante,
+          character.es_profesor,
+          character.es_mago_oscuro,
+          character.es_muggle,
+          character.es_personaje_principal,
+          character.es_personaje_secundario
+        ];
+        let nombres = [
+          character.nombre
+        ];
+        nombreValues.push(nombres)
+        characterValues.push(values);
+        console.log(characterValues);
+        console.log(nombreValues);
+      });
 
-    
-    characterValues.forEach((values, index) => {
-      console.log(`Comparando personaje ${index + 1} con las respuestas del usuario:`);
-      console.log("Valores del personaje:", values);
-      console.log("Respuestas del usuario:", userAnswers);
-      
-      if (values.length !== userAnswers.length) {
-        console.log("Las matrices tienen longitudes diferentes, no son iguales.");
-        return; 
-      }
-    
-      
-      let areEqual = true; 
-      for (let i = 0; i < values.length; i++) {
-        if (values[i] !== userAnswers[i]) {
-          areEqual = false;
-          break;
+      characterValues.forEach((values, index) => {
+        console.log(`Comparando personaje ${index + 1} con las respuestas del usuario:`);
+        console.log("Valores del personaje:", values);
+        console.log("Respuestas del usuario:", userAnswers);
+
+        if (values.length !== userAnswers.length) {
+          console.log("Las matrices tienen longitudes diferentes, no son iguales.");
+          return; 
         }
-      }
-    
-      if (areEqual) {
-        console.log("Las matrices son iguales.");
-        igualIndex = index;
-      } else {
-        console.log("Las matrices no son iguales.");
-        
-      }
 
-    });
+        let areEqual = true; 
+        for (let i = 0; i < values.length; i++) {
+          if (values[i] !== userAnswers[i]) {
+            areEqual = false;
+            break;
+          }
+        }
 
-    if (igualIndex !== -1){
-      const nombrePersonaje = nombreValues[igualIndex];
-      console.log(`El personaje que coincide con las respuestas del usuario es: ${nombrePersonaje}`);
-      const resultElement = document.getElementById('resultElement');
-      resultElement.textContent = `El personaje que coincide con las respuestas del usuario es: ${nombrePersonaje}`;
-      questionElement.style.display = 'none';
-      reiniciarJuego();
-    } else {
-      console.log("Ninguna matriz fue igual.");
-    
-      nuevoNombre = prompt("No se encontró ninguna coincidencia. Por favor, ingrese el nombre del personaje correspondiente:");
+        if (areEqual) {
+          console.log("Las matrices son iguales.");
+          igualIndex = index;
+        } else {
+          console.log("Las matrices no son iguales.");
+        }
+      });
 
-      if (nuevoNombre) {
-        
-        nombreValues.push(nuevoNombre);
-    
+      if (igualIndex !== -1){
+        const nombrePersonaje = nombreValues[igualIndex];
+        console.log(`El personaje que coincide con las respuestas del usuario es: ${nombrePersonaje}`);
         const resultElement = document.getElementById('resultElement');
-        resultElement.textContent = `El personaje que coincide con las respuestas del usuario es: ${nuevoNombre}`;
-        const questionsContainer = document.getElementById('questionsContainer');
+        resultElement.textContent = `El personaje que coincide con las respuestas del usuario es: ${nombrePersonaje}`;
         questionElement.style.display = 'none';
-        // userAnswers.unshift(true);
-        console.log(userAnswers);
-        enviarRespuestasJson();
-        // reiniciarJuego();
-        
+        reiniciarJuego();
       } else {
-      console.log("El usuario canceló la operación.");
-      }  
-    }
-    
-  }
+        console.log("Ninguna matriz fue igual.");
 
-  function reiniciarJuego() {
-    setTimeout(() => {
-      location.reload(); 
-    }, 2000);
-  }
-  
-  function enviarRespuestasJson() {
-  const nuevoPersonaje = {
-    nombre: nuevoNombre,
-    hombre: userAnswers[0],
-    mujer: userAnswers[1],
-    es_estudiante: userAnswers[2],
-    es_profesor: userAnswers[3],
-    es_mago_oscuro: userAnswers[4],
-    es_muggle: userAnswers[5],
-    es_personaje_principal: userAnswers[6],
-    es_personaje_secundario: userAnswers[7]
-  };
+        nuevoNombre = prompt("No se encontró ninguna coincidencia. Por favor, ingrese el nombre del personaje correspondiente:");
 
-  // Leer el archivo personajes.json actual
-  fs.readFile('personajes.json', 'utf8', (err, data) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
+        if (nuevoNombre) {
 
-    // Parsear el contenido del archivo JSON actual
-    let personajes = JSON.parse(data);
+          nombreValues.push(nuevoNombre);
 
-    // Agregar el nuevo personaje al arreglo existente de personajes
-    personajes.push(nuevoPersonaje);
+          const resultElement = document.getElementById('resultElement');
+          resultElement.textContent = `El personaje que coincide con las respuestas del usuario es: ${nuevoNombre}`;
+          const questionsContainer = document.getElementById('questionsContainer');
+          questionElement.style.display = 'none';
+          console.log(userAnswers);
 
-    // Convertir el objeto JavaScript a formato JSON
-    let nuevoContenidoJson = JSON.stringify(personajes, null, 2);
+          // Enviar los datos del nuevo personaje al servidor
+          enviarRespuestasJson(nuevoNombre, userAnswers);
 
-    // Escribir el contenido actualizado de vuelta al archivo personajes.json
-    fs.writeFile('personajes.json', nuevoContenidoJson, 'utf8', (err) => {
-      if (err) {
-        console.error(err);
-        return;
+        } else {
+          console.log("El usuario canceló la operación.");
+        }  
       }
-      console.log('¡Nuevo personaje agregado y archivo JSON actualizado!');
-      reiniciarJuego();
+    }
+
+    function reiniciarJuego() {
+      setTimeout(() => {
+        location.reload(); 
+      }, 2000);
+    }
+
+    function enviarRespuestasJson(nombre, respuestas) {
+      const nuevoPersonaje = {
+        nombre: nombre,
+        hombre: respuestas[0],
+        mujer: respuestas[1],
+        es_estudiante: respuestas[2],
+        es_profesor: respuestas[3],
+        es_mago_oscuro: respuestas[4],
+        es_muggle: respuestas[5],
+        es_personaje_principal: respuestas[6],
+        es_personaje_secundario: respuestas[7]
+      };
+
+      fetch('http://localhost:3000/agregar_personaje', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(nuevoPersonaje)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al agregar el nuevo personaje');
+        }
+        console.log('El nuevo personaje se ha agregado correctamente.');
+        reiniciarJuego();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+
+    // Agregar event listeners a los botones
+    yesBtn.addEventListener('click', () => {
+      nextQuestion(true); 
     });
-  });
-}
-  
-  yesBtn.addEventListener('click', () => {
-    nextQuestion(true); 
-  });
 
-  noBtn.addEventListener('click', () => {
-    nextQuestion(false); 
-  });
+    noBtn.addEventListener('click', () => {
+      nextQuestion(false); 
+    });
 
-  askQuestion();
-})
-.catch(error => console.error('Error al cargar el archivo JSON:', error));
+    // Empezar el juego
+    askQuestion();
+  })
+  .catch(error => console.error('Error al cargar el archivo JSON:', error));
