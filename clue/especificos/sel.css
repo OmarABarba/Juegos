@@ -3,4 +3,21 @@ body {
     padding: 0;
     background-color: black; 
     color: white; 
+    background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
+    background-size: cover; /* Ajusta la imagen de fondo para que cubra todo el fondo */
+    background-position: center top; /* Centra la imagen de fondo en horizontal y la posiciona en la parte inferior */
+    display: flex; /* Usa flexbox para alinear los elementos */
+    flex-direction: column; /* Alinea los elementos verticalmente */
+    align-items: center; /* Centra horizontalmente los elementos */
+    justify-content: right; /* Centra verticalmente los elementos */
+    min-height: 100vh;
+}
+
+h2 {
+    text-align: center; /* Centra el texto */
+    background-color: rgb(32, 32, 5,.8);
+}
+
+button {
+    margin: 10px; /* Añade un pequeño margen entre los botones */
 }
