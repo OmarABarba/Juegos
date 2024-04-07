@@ -1,0 +1,57 @@
+[
+    {
+    "nombre": "Harry Potter",
+    "hombre":true,
+    "mujer":false,
+    "es_estudiante": true,
+    "es_profesor": false,
+    "es_mago_oscuro": false,
+    "es_muggle": false,
+    "es_personaje_principal": true,
+    "es_personaje_secundario": false
+    },
+    {
+    "nombre": "Severus Snape",
+    "hombre":true,
+    "mujer":false,
+    "es_estudiante": false,
+    "es_profesor": true,
+    "es_mago_oscuro": true,
+    "es_muggle": false,
+    "es_personaje_principal": false,
+    "es_personaje_secundario": true
+    },
+    {
+    "nombre": "Lord Voldemort",
+    "hombre":true,
+    "mujer":false,
+    "es_estudiante": false,
+    "es_profesor": false,
+    "es_mago_oscuro": true,
+    "es_muggle": false,
+    "es_personaje_principal": false,
+    "es_personaje_secundario": false
+    },
+    {
+    "nombre": "Hermione Granger",
+    "hombre":false,
+    "mujer":true,
+    "es_estudiante": true,
+    "es_profesor": false,
+    "es_mago_oscuro": false,
+    "es_muggle": false,
+    "es_personaje_principal": true,
+    "es_personaje_secundario": false
+    },
+    {
+    "nombre": "Sr. Dursley",
+    "hombre":true,
+    "mujer":false,
+    "es_estudiante": false,
+    "es_profesor": false,
+    "es_mago_oscuro": false,
+    "es_muggle": true,
+    "es_personaje_principal": false,
+    "es_personaje_secundario": true
+    }
+]

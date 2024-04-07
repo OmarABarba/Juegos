@@ -12,29 +12,114 @@ h1 {
     font-family: "Workbench", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
+    font-size: 100px;
     font-style: normal;
     font-variation-settings:
-    "BLED" 0,
-    "SCAN" 0;
+    "BLED" 36,
+    "SCAN" 10;
     margin-top: 100px;
     text-align: center;
+    background-color: rgba(6, 37, 70, 0.5);
+    color: rgb(216, 163, 85);
     
 }
 
 #contenedor {
     text-align: center; /* Centrar el contenido */
-    margin-top: 220px; /* Agrega 20px de espacio superior */
+    margin-top: 120px;
+    transition: opacity 1s ease;
 }
 
 #parrafo {
-    font-family: Arial, sans-serif; /* Cambiar la fuente */
-    font-size: 18px; /* Tamaño del texto */
-    color: #fff6f6; /* Color del texto */
-    background-color: #5e2197; /* Color de fondo */
-    padding: 20px; /* Espaciado interior */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
-    max-width: 80%; /* Ancho máximo */
-    margin: 0 auto; /* Centrar horizontalmente */
-    tex
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    font-style: normal;
+    color: azure;
+    background-color:rgba(6, 37, 70, .9);
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    max-width: 600px; 
+    margin: 0 auto; 
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1s ease, transform 0.5s ease; 
+}
+
+#parrafo.fade-out {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.boton-regresar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.boton-regresar:hover {
+    background-color: #177ae4;
+    
+}
+
+.boton-select {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    position: absolute;
+    top: 550px; 
+    left: 660px;
+    
+}
+
+.boton-select::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 100%;
+    background-color: #e0e0e0;
+    border-radius: 0 0 5px 5px;
+    transition: width 0.3s ease;
+}
+
+.boton-select:hover::after {
+    width: 200%;
+    left: -50%;
+    transition: width 0.3s ease;
+}
+
+.boton-select svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+}
+
+.boton-select svg path {
+    fill: white;
+}
+
+.boton-select img,
+.boton-select object {
+    width: 200px; /* ajusta el ancho según sea necesario */
+    height: 200px; /* ajusta la altura según sea necesario */
 }

@@ -1,0 +1,60 @@
+
+body{
+  
+    margin: 0;
+    padding: 0;
+    background-image: url(/adivina/imagenes/fondo.jpeg); 
+    background-position: top center; 
+    background-attachment:scroll;
+    
+}
+
+.container {
+  text-align: center;
+  padding: 10px 0;
+  background-color: rgba(56, 43, 8, 0.8);
+  max-width: 80%;
+  margin: auto;
+}
+
+h1{
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: "Griffy", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+p {
+color: #ffff;
+padding: 10px 20px;
+border-radius: 5px;
+font-size: 50px;
+font-family: "Griffy", system-ui;
+font-weight: 400;
+font-style: normal;
+font-size: 30px;
+margin-bottom: 10px;
+}
+
+.container2 {
+  width: auto; 
+  height: 350px;
+  overflow: hidden;
+}
+.container2 img {
+  width: 100%;
+  height: auto; 
+}
+
+.container3 {
+  color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color:rgba(56, 43, 8, 0.8);
+  text-align: center;
+}

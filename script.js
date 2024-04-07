@@ -15,7 +15,7 @@ document.getElementById("clue").addEventListener("click", function() {
 
 document.getElementById("ad").addEventListener("click", function() {
     alert("¡Vamos a jugar Adivina quien!");
-    
+    window.location.href = "adivina/adivina.html";
 });
 
 document.getElementById("clue").addEventListener("click", function() {
