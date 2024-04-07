@@ -20,7 +20,7 @@ fetch('personajes.json')
     const questionElement = document.getElementById('question');
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
-    const fs = require('fs'); 
+    
 
     let userAnswers = []; 
     let characterValues = [];
