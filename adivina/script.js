@@ -20,6 +20,8 @@ fetch('personajes.json')
     const questionElement = document.getElementById('question');
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
+    const fs = require('fs'); 
+
     let userAnswers = []; 
     let characterValues = [];
     let nombreValues =[];
@@ -136,37 +138,45 @@ fetch('personajes.json')
   }
   
   function enviarRespuestasJson() {
-    const nuevoPersonaje = {
-      nombre: nuevoNombre,
-      hombre: userAnswers[0],
-      mujer: userAnswers[1],
-      es_estudiante: userAnswers[2],
-      es_profesor: userAnswers[3],
-      es_mago_oscuro: userAnswers[4],
-      es_muggle: userAnswers[5],
-      es_personaje_principal: userAnswers[6],
-      es_personaje_secundario: userAnswers[7]
-    };
-  
-    fetch('http://localhost:3000/agregar_personaje', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(nuevoPersonaje)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Error al agregar el nuevo personaje');
+  const nuevoPersonaje = {
+    nombre: nuevoNombre,
+    hombre: userAnswers[0],
+    mujer: userAnswers[1],
+    es_estudiante: userAnswers[2],
+    es_profesor: userAnswers[3],
+    es_mago_oscuro: userAnswers[4],
+    es_muggle: userAnswers[5],
+    es_personaje_principal: userAnswers[6],
+    es_personaje_secundario: userAnswers[7]
+  };
+
+  // Leer el archivo personajes.json actual
+  fs.readFile('personajes.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    // Parsear el contenido del archivo JSON actual
+    let personajes = JSON.parse(data);
+
+    // Agregar el nuevo personaje al arreglo existente de personajes
+    personajes.push(nuevoPersonaje);
+
+    // Convertir el objeto JavaScript a formato JSON
+    let nuevoContenidoJson = JSON.stringify(personajes, null, 2);
+
+    // Escribir el contenido actualizado de vuelta al archivo personajes.json
+    fs.writeFile('personajes.json', nuevoContenidoJson, 'utf8', (err) => {
+      if (err) {
+        console.error(err);
+        return;
       }
-      console.log('El nuevo personaje se ha agregado correctamente.');
-      // Reiniciar el juego u realizar otras acciones si es necesario
+      console.log('¡Nuevo personaje agregado y archivo JSON actualizado!');
       reiniciarJuego();
-    })
-    .catch(error => {
-      console.error('Error:', error);
     });
-  }
+  });
+}
   
   yesBtn.addEventListener('click', () => {
     nextQuestion(true); 
