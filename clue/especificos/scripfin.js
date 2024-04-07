@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     audioElement.play();
 
-    // Pausa la música después de 10 segundos
+    
     setTimeout(function() {
         audioElement.pause();
     }, 10000);
