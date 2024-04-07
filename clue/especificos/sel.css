@@ -3,13 +3,13 @@ body {
     padding: 0;
     background-color: black; 
     color: white; 
-    background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
-    background-size: cover; /* Ajusta la imagen de fondo para que cubra todo el fondo */
+    background-repeat: no-repeat; 
+    background-size: auto; 
     background-position: center top; /* Centra la imagen de fondo en horizontal y la posiciona en la parte inferior */
-    display: flex; /* Usa flexbox para alinear los elementos */
-    flex-direction: column; /* Alinea los elementos verticalmente */
-    align-items: center; /* Centra horizontalmente los elementos */
-    justify-content: right; /* Centra verticalmente los elementos */
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: right; 
     min-height: 100vh;
 }
 
