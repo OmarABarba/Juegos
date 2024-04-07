@@ -119,7 +119,7 @@ fetch('personajes.json')
         questionElement.style.display = 'none';
         userAnswers.unshift(true);
         console.log(userAnswers);
-        enviarRespuestasAlServidor();
+        enviarRespuestasJson();
         // reiniciarJuego();
         
       } else {
@@ -135,7 +135,7 @@ fetch('personajes.json')
     }, 2000);
   }
   
-  function enviarRespuestasAlServidor() {
+  function enviarRespuestasJson() {
     const dataToSend = {
       userAnswers: userAnswers 
     };
