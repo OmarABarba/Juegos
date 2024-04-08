@@ -19,5 +19,29 @@ h2 {
 }
 
 button {
-    margin: 10px; /* Añade un pequeño margen entre los botones */
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3e8e41;
+}
+
+.custom-button {
+    /* Estilos personalizados para los botones */
+    background-color: #8e44ad;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-button:hover {
+    background-color: #7d3c98;
 }
