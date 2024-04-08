@@ -18,34 +18,43 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var armas = [
         { nombre: "Daga", imagen: "url('/clue/especificos/imagenes/daga.jpeg')", texto: "Descripción de la daga..." },
+
         { nombre: "Báculo de mago", imagen: "url('/clue/especificos/imagenes/baculo.jpeg')", texto: "Descripción del báculo de mago..." },
+
         { nombre: "Arco", imagen: "url('/clue/especificos/imagenes/arco.jpeg')", texto: "Descripción del arco..." },
+
         { nombre: "Espada", imagen: "url('/clue/especificos/imagenes/espada.jpeg')", texto: "Descripción de la espada..." },
+
         { nombre: "Poción venenosa", imagen: "url('/clue/especificos/imagenes/posion.jpeg')", texto: "Descripción de la poción venenosa..." }
     ];
 // LOGICA
     const historiasKiller = [
-        {historias: "La bruja se encontraba con el vestido manchado y el personaje tenia un poco de lodo en el vestido se ve que esconde un frasco vacio",personaje:"Bruja", lugar:"Pantano", arma: "Pocion"},
-        {historias: "El Hobbit se encontraba con el pantalon manchado y el personaje tenia un poco de lodo en el hongos en el cabello no se veria su daga por ningun lado",personaje: "Hobbit", lugar:"Hongos", arma: "Daga",killer: true},
-        { historias: "El troll esta en el bsoque de sombras asustado con un morete en la cara y no se veria su espada",personaje:"Troll", lugar:"Sombras", arma:"Espada",killer: true
-        },
         { historias:"El cazador estaria en la cascada tratando de arreglar su arco y se veria mollesto", personaje:"Cazador", lugar:"Cascada", arma:"Arco",killer: true
         },
+
+        {historias: "El Hobbit se encontraba con el pantalon manchado y el personaje tenia un poco de lodo en el hongos en el cabello no se veria su daga por ningun lado",personaje: "Hobbit", lugar:"Hongos", arma: "Daga",killer: true},
+
         { historias: "El mago se encontraria en el Arbol central y se veria su baculo caliente como si lo hubiera usado hace poco",personaje:"Mago", lugar:"Arbol", arma:"Baculo",killer: true
+        },
+
+        {historias: "La bruja se encontraba con el vestido manchado y el personaje tenia un poco de lodo en el vestido se ve que esconde un frasco vacio",personaje:"Bruja", lugar:"Pantano", arma: "Pocion"},
+        
+        {historias: "El troll esta en el bsoque de sombras asustado con un morete en la cara y no se veria su espada",personaje:"Troll", lugar:"Sombras", arma:"Espada",killer: true
         }
         
+    
     ]
 
     const historiasNorm = [
-        {historias: "La bruja se encontraba con el vestido sin manchar y el personaje se encuentra en el pantano y se veria un frasco lleno",personaje:"Bruja", lugar:"Pantano", arma: "Pocion", killer: false},
-        {historias: "El Hobbit se encontraba en el bosque de hongos giganes con su daga en la cintura.",personaje: "Hobbit", lugar:"Hongos", arma: "Daga",killer: false},
-        { historias: "El troll esta en el bsoque de sombras tranquilo biendo las sombras con su espada",personaje:"Troll", lugar:"Sombras", arma:"Espada",killer: false
-        },
         { historias:"El cazador estaria en la cascada tomando un cafe con su arco en la roca de aun lado ", personaje:"Cazador", lugar:"Cascada", arma:"Arco",killer: false
         },
+        {historias: "El Hobbit se encontraba en el bosque de hongos giganes con su daga en la cintura.",personaje: "Hobbit", lugar:"Hongos", arma: "Daga",killer: false},
         { historias: "El mago se encontraria en el Arbol central tomando notas del arol y el baculo estaria en la espalda",personaje:"Mago", lugar:"Arbol", arma:"Baculo",killer: false
-        }
+        },
+        {historias: "La bruja se encontraba con el vestido sin manchar y el personaje se encuentra en el pantano y se veria un frasco lleno",personaje:"Bruja", lugar:"Pantano", arma: "Pocion", killer: false},
         
+        { historias: "El troll esta en el bsoque de sombras tranquilo biendo las sombras con su espada",personaje:"Troll", lugar:"Sombras", arma:"Espada",killer: false
+        }   
     ]
 
     function obtenerHistoriaAleatoria(historiasArray) {
@@ -66,17 +75,27 @@ document.addEventListener("DOMContentLoaded", function() {
         
         return matriz;
     }
+    
+    
+
+
     // Uso de la función
     const { historia, indice } = obtenerHistoriaAleatoria(historiasKiller);
     console.log("Historia aleatoria:", historia);
     console.log("Índice de la historia:", indice);
     const index = indice;
     const historiasModificadas = reemplazarObjetoEnIndice(historiasNorm.slice(), historia, indice);
-console.log("Historias modificadas:", historiasModificadas);
 
-    
-    
-    
+
+console.log("Historias modificadas:", historiasModificadas);
+const hist = historiasModificadas;
+////////////
+function mostrarTexto(hist) {
+    return `${hist.historias} ${hist.personaje} está en ${hist.lugar} con ${historia.arma}.`;
+}
+
+
+
 
     document.getElementById("ubicacionBtn").addEventListener("click", function() {
         actualizarFondo("url('/imagenes/mapa.jpeg')");
@@ -122,7 +141,8 @@ console.log("Historias modificadas:", historiasModificadas);
         container.innerHTML = ""; // Limpiar cualquier contenido previo
 
         // Crear botones para cada elemento de la lista
-        lista.forEach(function(elemento) {
+        lista.forEach(
+            function(elemento) {
             var button = document.createElement("button");
             button.textContent = elemento.nombre;
             button.addEventListener("click", function() {
@@ -137,7 +157,41 @@ console.log("Historias modificadas:", historiasModificadas);
         container.style.alignItems = "center";
     }
     
+    document.getElementById("ubicacionBtn").addEventListener("click", function() {
+        actualizarFondo("url('/imagenes/mapa.jpeg')");
+        
+    });
+    document.getElementById("ubicacionBtn").addEventListener("click", function() {
+        actualizarFondo("url('/imagenes/mapa.jpeg')");
+        
+    });
+    
+     // Función para crear botones y agregar funcionalidad de mostrar texto al presionarlos
+     function crearBotones() {
+        const container = document.getElementById("botonesContainer");
 
+        historias.forEach(function(historia, index) {
+            const button = document.createElement("button");
+            button.textContent = `Historia ${index + 1}`;
+            button.addEventListener("click", function() {
+                const texto = mostrarTexto(historia);
+                const parrafo = document.createElement("p");
+                parrafo.textContent = texto;
+                document.body.appendChild(parrafo);
+
+                // Cambiar el texto del Hobbit después de 2 segundos
+                if (historia.personaje === "Hobbit") {
+                    setTimeout(function() {
+                        const descripcionHobbit = document.getElementById("descripcionHobbit");
+                        descripcionHobbit.textContent = "Nuevo texto para el Hobbit después de 2 segundos.";
+                    }, 2000);
+                }
+            });
+            container.appendChild(button);
+        });
+    }
+
+    crearBotones();
 });
 
 
