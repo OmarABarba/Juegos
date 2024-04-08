@@ -109,7 +109,7 @@ console.log("Historias modificadas:", historiasModificadas);
         document.getElementById("ubicacionButtons").style.display = "none";
         document.getElementById("personajeButtons").style.display = "none";
         document.getElementById("armaButtons").style.display = "none";
-    
+
         // Mostrar solo el contenedor de botones correspondiente
         var container;
         if (textoBase === "Ubicación") {
@@ -120,19 +120,14 @@ console.log("Historias modificadas:", historiasModificadas);
             container = document.getElementById("armaButtons");
         }
         container.innerHTML = ""; // Limpiar cualquier contenido previo
-    
-        // Crear botones y párrafos para cada elemento de la lista
+
+        // Crear botones para cada elemento de la lista
         lista.forEach(function(elemento) {
             var button = document.createElement("button");
             button.textContent = elemento.nombre;
             button.addEventListener("click", function() {
                 actualizarFondo(elemento.imagen);
                 mostrarContenido(elemento.texto);
-    
-                // Agregar párrafo con el nombre de la ubicación, personaje o arma
-                var paragraph = document.createElement("p");
-                paragraph.textContent = "Nombre: " + elemento.nombre;
-                container.appendChild(paragraph);
             });
             container.appendChild(button);
         });
