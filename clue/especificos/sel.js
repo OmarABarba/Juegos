@@ -14,14 +14,48 @@ document.addEventListener("DOMContentLoaded", function() {
         { nombre: "Mago", imagen: "url('/clue/especificos/imagenes/mago.jpeg')", texto: "Descripción del mago..." },
         { nombre: "Hobbit", imagen: "url('/clue/especificos/imagenes/hobbit.jpeg')", texto: "Descripción del hobbit..." }
     ];
+    
 
     var armas = [
-        { nombre: "Daga", imagen: "url('/clue/especificos/imagenes/daga.jpg')", texto: "Descripción de la daga..." },
-        { nombre: "Báculo de mago", imagen: "url('/clue/especificos/imagenes/baculo.jpg')", texto: "Descripción del báculo de mago..." },
-        { nombre: "Arco", imagen: "url('/clue/especificos/imagenes/arco.jpg')", texto: "Descripción del arco..." },
-        { nombre: "Espada", imagen: "url('/clue/especificos/imagenes/espada.jpg')", texto: "Descripción de la espada..." },
-        { nombre: "Poción venenosa", imagen: "url('/clue/especificos/imagenes/pocion.jpg')", texto: "Descripción de la poción venenosa..." }
+        { nombre: "Daga", imagen: "url('/clue/especificos/imagenes/daga.jpeg')", texto: "Descripción de la daga..." },
+        { nombre: "Báculo de mago", imagen: "url('/clue/especificos/imagenes/baculo.jpeg')", texto: "Descripción del báculo de mago..." },
+        { nombre: "Arco", imagen: "url('/clue/especificos/imagenes/arco.jpeg')", texto: "Descripción del arco..." },
+        { nombre: "Espada", imagen: "url('/clue/especificos/imagenes/espada.jpeg')", texto: "Descripción de la espada..." },
+        { nombre: "Poción venenosa", imagen: "url('/clue/especificos/imagenes/posion.jpeg')", texto: "Descripción de la poción venenosa..." }
     ];
+
+    const historiasKiller = [
+        {historias: "La bruja se encontraba con el vestido manchado y el personaje tenia un poco de lodo en el vestido se ve que esconde un frasco vacio",personaje:"Bruja", lugar:"Pantano", arma: "Pocion"},
+        {historias: "El Hobbit se encontraba con el pantalon manchado y el personaje tenia un poco de lodo en el hongos en el cabello no se veria su daga por ningun lado",personaje: "Hobbit", lugar:"Hongos", arma: "Daga"},
+        { historias: "El troll esta en el bsoque de sombras asustado con un morete en la cara y no se veria su espada",personaje:"Troll", lugar:"Sombras", arma:"Espada"
+        },
+        { historias:"El cazador estaria en la cascada tratando de arreglar su arco y se veria mollesto", personaje:"Cazador", lugar:"Cascada", arma:"Arco"
+        },
+        { historias: "El mago se encontraria en el Arbol central y se veria su baculo caliente como si lo hubiera usado hace poco",personaje:"Mago", lugar:"Arbol", arma:"Baculo"
+        }
+        
+    ]
+
+    function obtenerHistoriaAleatoria(historiasArray) {
+        // Obtener un índice aleatorio
+        const indiceAleatorio = Math.floor(Math.random() * historiasArray.length);
+        
+        // Obtener el objeto correspondiente al índice aleatorio
+        const historiaAleatoria = historiasArray[indiceAleatorio];
+        
+        // Retornar la historia aleatoria y su índice
+        return { historia: historiaAleatoria, indice: indiceAleatorio };
+    }
+    
+    // Uso de la función
+    const { historia, indice } = obtenerHistoriaAleatoria(historiasKiller);
+    console.log("Historia aleatoria:", historia);
+    console.log("Índice de la historia:", indice);
+    
+    
+    const historiaAleatoria = obtenerHistoriaAleatoria(historiasKiller);
+    console.log(historiaAleatoria);
+    
 
     document.getElementById("ubicacionBtn").addEventListener("click", function() {
         actualizarFondo("url('/imagenes/mapa.jpeg')");
@@ -81,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
         container.style.flexDirection = "column";
         container.style.alignItems = "center";
     }
-
+    
 
 });
 
