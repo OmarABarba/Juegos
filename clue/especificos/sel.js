@@ -95,6 +95,7 @@ var armas = [
         }
         container.innerHTML = ""; // Limpiar cualquier contenido previo
 
+        
         // Crear botones para cada elemento de la lista
         lista.forEach(function(elemento) {
             var button = document.createElement("button");
