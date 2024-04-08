@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var personajes = [
         { nombre: "Bruja", imagen: "url('/clue/especificos/imagenes/bruja.jpeg')", texto: "Descripción de la bruja..." },
         { nombre: "Ogro", imagen: "url('/clue/especificos/imagenes/ogro.jpeg')", texto: "Descripción del ogro..." },
-        { nombre: "Cazador", imagen: "url('/clue/especificos/imagenes/cazador.jpeg')", texto: "Descripción del cazador..." },
+        { nombre: "Cazador", imagen: "url('/clue/especificos/imagenes/cazador2.jpeg')", texto: "Descripción del cazador..." },
         { nombre: "Mago", imagen: "url('/clue/especificos/imagenes/mago.jpeg')", texto: "Descripción del mago..." },
         { nombre: "Hobbit", imagen: "url('/clue/especificos/imagenes/hobbit.jpeg')", texto: "Descripción del hobbit..." }
     ];
@@ -23,38 +23,53 @@ document.addEventListener("DOMContentLoaded", function() {
         { nombre: "Espada", imagen: "url('/clue/especificos/imagenes/espada.jpeg')", texto: "Descripción de la espada..." },
         { nombre: "Poción venenosa", imagen: "url('/clue/especificos/imagenes/posion.jpeg')", texto: "Descripción de la poción venenosa..." }
     ];
-
+// LOGICA
     const historiasKiller = [
         {historias: "La bruja se encontraba con el vestido manchado y el personaje tenia un poco de lodo en el vestido se ve que esconde un frasco vacio",personaje:"Bruja", lugar:"Pantano", arma: "Pocion"},
-        {historias: "El Hobbit se encontraba con el pantalon manchado y el personaje tenia un poco de lodo en el hongos en el cabello no se veria su daga por ningun lado",personaje: "Hobbit", lugar:"Hongos", arma: "Daga"},
-        { historias: "El troll esta en el bsoque de sombras asustado con un morete en la cara y no se veria su espada",personaje:"Troll", lugar:"Sombras", arma:"Espada"
+        {historias: "El Hobbit se encontraba con el pantalon manchado y el personaje tenia un poco de lodo en el hongos en el cabello no se veria su daga por ningun lado",personaje: "Hobbit", lugar:"Hongos", arma: "Daga",killer: true},
+        { historias: "El troll esta en el bsoque de sombras asustado con un morete en la cara y no se veria su espada",personaje:"Troll", lugar:"Sombras", arma:"Espada",killer: true
         },
-        { historias:"El cazador estaria en la cascada tratando de arreglar su arco y se veria mollesto", personaje:"Cazador", lugar:"Cascada", arma:"Arco"
+        { historias:"El cazador estaria en la cascada tratando de arreglar su arco y se veria mollesto", personaje:"Cazador", lugar:"Cascada", arma:"Arco",killer: true
         },
-        { historias: "El mago se encontraria en el Arbol central y se veria su baculo caliente como si lo hubiera usado hace poco",personaje:"Mago", lugar:"Arbol", arma:"Baculo"
+        { historias: "El mago se encontraria en el Arbol central y se veria su baculo caliente como si lo hubiera usado hace poco",personaje:"Mago", lugar:"Arbol", arma:"Baculo",killer: true
+        }
+        
+    ]
+
+    const historiasNorm = [
+        {historias: "La bruja se encontraba con el vestido sin manchar y el personaje se encuentra en el pantano y se veria un frasco lleno",personaje:"Bruja", lugar:"Pantano", arma: "Pocion", killer: false},
+        {historias: "El Hobbit se encontraba en el bosque de hongos giganes con su daga en la cintura.",personaje: "Hobbit", lugar:"Hongos", arma: "Daga",killer: false},
+        { historias: "El troll esta en el bsoque de sombras tranquilo biendo las sombras con su espada",personaje:"Troll", lugar:"Sombras", arma:"Espada",killer: false
+        },
+        { historias:"El cazador estaria en la cascada tomando un cafe con su arco en la roca de aun lado ", personaje:"Cazador", lugar:"Cascada", arma:"Arco",killer: false
+        },
+        { historias: "El mago se encontraria en el Arbol central tomando notas del arol y el baculo estaria en la espalda",personaje:"Mago", lugar:"Arbol", arma:"Baculo",killer: false
         }
         
     ]
 
     function obtenerHistoriaAleatoria(historiasArray) {
-        // Obtener un índice aleatorio
+        
         const indiceAleatorio = Math.floor(Math.random() * historiasArray.length);
-        
-        // Obtener el objeto correspondiente al índice aleatorio
         const historiaAleatoria = historiasArray[indiceAleatorio];
-        
-        // Retornar la historia aleatoria y su índice
         return { historia: historiaAleatoria, indice: indiceAleatorio };
     }
     
+    function reemplazarHistoriaAleatoria(array, obtenerHistoriaFunc) {
+        const { historia, indice } = obtenerHistoriaFunc(historiasNorm);
+        array[indice] = historia;
+        return array;
+    }
     // Uso de la función
     const { historia, indice } = obtenerHistoriaAleatoria(historiasKiller);
     console.log("Historia aleatoria:", historia);
     console.log("Índice de la historia:", indice);
+    const index = indice;
+    const historiasModificadas = reemplazarHistoriaAleatoria(historiasNorm.slice(), obtenerHistoriaAleatoria);
+console.log("Historias modificadas:", historiasModificadas);
+
     
     
-    const historiaAleatoria = obtenerHistoriaAleatoria(historiasKiller);
-    console.log(historiaAleatoria);
     
 
     document.getElementById("ubicacionBtn").addEventListener("click", function() {
