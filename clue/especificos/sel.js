@@ -55,17 +55,23 @@ document.addEventListener("DOMContentLoaded", function() {
         return { historia: historiaAleatoria, indice: indiceAleatorio };
     }
     
-    function reemplazarHistoriaAleatoria(array, obtenerHistoriaFunc) {
-        const { historia, indice } = obtenerHistoriaFunc(historiasNorm);
-        array[indice] = historia;
-        return array;
+    function reemplazarObjetoEnIndice(matriz, objeto, indice) {
+                if (indice < 0 || indice >= matriz.length) {
+            console.error("El índice proporcionado está fuera de los límites de la matriz.");
+            return matriz;
+        }
+    
+                matriz[indice] = objeto;
+    
+        
+        return matriz;
     }
     // Uso de la función
     const { historia, indice } = obtenerHistoriaAleatoria(historiasKiller);
     console.log("Historia aleatoria:", historia);
     console.log("Índice de la historia:", indice);
     const index = indice;
-    const historiasModificadas = reemplazarHistoriaAleatoria(historiasNorm.slice(), obtenerHistoriaAleatoria);
+    const historiasModificadas = reemplazarObjetoEnIndice(historiasNorm.slice(), historia, indice);
 console.log("Historias modificadas:", historiasModificadas);
 
     
@@ -103,7 +109,7 @@ console.log("Historias modificadas:", historiasModificadas);
         document.getElementById("ubicacionButtons").style.display = "none";
         document.getElementById("personajeButtons").style.display = "none";
         document.getElementById("armaButtons").style.display = "none";
-
+    
         // Mostrar solo el contenedor de botones correspondiente
         var container;
         if (textoBase === "Ubicación") {
@@ -114,14 +120,19 @@ console.log("Historias modificadas:", historiasModificadas);
             container = document.getElementById("armaButtons");
         }
         container.innerHTML = ""; // Limpiar cualquier contenido previo
-
-        // Crear botones para cada elemento de la lista
+    
+        // Crear botones y párrafos para cada elemento de la lista
         lista.forEach(function(elemento) {
             var button = document.createElement("button");
             button.textContent = elemento.nombre;
             button.addEventListener("click", function() {
                 actualizarFondo(elemento.imagen);
                 mostrarContenido(elemento.texto);
+    
+                // Agregar párrafo con el nombre de la ubicación, personaje o arma
+                var paragraph = document.createElement("p");
+                paragraph.textContent = "Nombre: " + elemento.nombre;
+                container.appendChild(paragraph);
             });
             container.appendChild(button);
         });
