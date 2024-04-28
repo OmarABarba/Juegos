@@ -119,6 +119,11 @@ var armas = [
         actualizarFondo("url('/imagenes/mapa.jpeg')");
     });
 
+    document.getElementById("botsel").addEventListener("click", function() {
+        alert("¡Vamos a jugar Adivina quien!");
+        window.location.href = "adivina/adivina.html";
+    });
+
     document.getElementById("ubicacionBtn").addEventListener("click", function() {
         actualizarFondo("url('/imagenes/mapa.jpeg')");
     });
