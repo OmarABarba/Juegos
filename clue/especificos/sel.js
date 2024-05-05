@@ -183,11 +183,21 @@ var armas = [
         // Obtener el valor seleccionado del menú desplegable y almacenarlo en el objeto de selección
         seleccion.lugar = document.getElementById("opcionesLugar").value;
     });
-
+    let comparar;
     document.getElementById("enviar-btn").addEventListener("click", function() {
         if (seleccion.personaje !== "" && seleccion.arma !== "" && seleccion.lugar !== "") {
             console.log("Selección completa:", seleccion);
             // Aquí puedes realizar alguna acción adicional si es necesario
+            let comparar = compararhist(historia,seleccion)
+            console.log("Los objetos son iguales:", comparar);
+            if (comparar) {
+                alert("Excelente, lo has conseguido. ¡Es el asesino!");
+                // Redireccionar a otra página después de cerrar la alerta
+                window.location.href = "maincle.html";
+            } else {
+                alert("Lo siento, no es el asesino.");
+                window.location.href = "maincle.html";
+            }
         } else {
             console.log("Por favor selecciona un asesino antes de enviar.");
             alert("Por favor selecciona un asesino antes de enviar.");
@@ -200,7 +210,38 @@ var armas = [
         // Ocultar el botón de enviar después de hacer clic
         document.getElementById("enviar-btn").style.display = "none";
     });
-    function comparar(seleccion,historia){
+
+    function compararhist(historia,seleccion){
+        let comparar={
+        personaje:"", 
+        lugar:"",
+        arma:""
+        }
+        console.log(seleccion)
         
-    }
+        for (i in seleccion){
+            comparar.personaje = seleccion.personaje
+            comparar.lugar= seleccion.lugar
+            comparar.arma = seleccion.arma
+        }
+        console.log(comparar)
+
+        for (let key in seleccion) {
+            if (seleccion.hasOwnProperty(key)) { // Verifica que la propiedad exista en seleccion
+            comparar[key] = seleccion[key];
+            }
+        }
+        
+        let objetosIguales = true;
+        
+        for (let key in comparar) {
+            if (historia[key] !== comparar[key]) {
+            objetosIguales = false;
+            break;
+            }
+        }
+        return objetosIguales;
+        }
+        
+    console.log("Valor de bandera fuera de la función de clic:", comparar);
 });
