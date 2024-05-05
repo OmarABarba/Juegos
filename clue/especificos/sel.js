@@ -120,8 +120,8 @@ var armas = [
     });
 
     document.getElementById("botsel").addEventListener("click", function() {
-        alert("¡Vamos a jugar Adivina quien!");
-        window.location.href = "adivina/adivina.html";
+        alert("Seleccionar al asecino");
+        actualizarFondo("url('/clue/especificos/imagenes/bosque.jpeg')");
     });
 
     document.getElementById("ubicacionBtn").addEventListener("click", function() {
