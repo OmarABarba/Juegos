@@ -157,24 +157,20 @@ var armas = [
         // Mostrar el menú desplegable de opciones de asesino
         document.getElementById("opcionesAsesino").style.display = "inline";
     });
-
-
+    
     document.getElementById("opcionesAsesino").addEventListener("change", function() {
         // Obtener el valor seleccionado del menú desplegable
-        let selectedOption = document.getElementById("opcionesAsesino").value;
-        console.log("Asesino seleccionado:", selectedOption);
+        seleccionAsesino = document.getElementById("opcionesAsesino").value;
+    });
     
-        //Aquí puedes realizar alguna acción basada en la opción seleccionada
-        //Por ejemplo:
-        if (selectedOption === "Asesino1") {
-            console.log("Asesino 1 seleccionado");
-        } else if (selectedOption === "Asesino2") {
-            console.log("Asesino 2 seleccionado");
-        } else if (selectedOption === "Asesino3") {
-            console.log("Asesino 3 seleccionado");
+    document.getElementById("enviar-btn").addEventListener("click", function() {
+        if (seleccionAsesino !== "") {
+            console.log("Asesino seleccionado:", seleccionAsesino);
+            //Aquí puedes realizar alguna acción adicional si es necesario
+        } else {
+            console.log("Por favor selecciona un asesino antes de enviar.");
         }
-    
-        // Ocultar el menú desplegable después de seleccionar una opción
+        // Ocultar el menú desplegable después de seleccionar una opción y hacer clic en enviar
         document.getElementById("opcionesAsesino").style.display = "none";
     });
 
