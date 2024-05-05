@@ -120,6 +120,9 @@ var armas = [
         actualizarFondo("url('/imagenes/mapa.jpeg')");
         mostrarContenido("Ubicaciones disponibles: Cascada, Hongos Gigantes, Arbol central, Pantano, Pinos de sobras");
         mostrarBotones(ubicaciones, "Ubicación");
+        document.getElementById("armaButtons").style.display = "none";
+        document.getElementById("personajeButtons").style.display = "none";
+        document.getElementById("opcionesAsesino").style.display = "none";
         
     });
 
@@ -127,13 +130,18 @@ var armas = [
         actualizarFondo("url('/clue/especificos/imagenes/personajes2.jpeg')");
         mostrarContenido("Personajes: Bruja, Ogro, Cazador, Mago, Hobbit");
         mostrarBotones(personajes, "Personaje");
+        document.getElementById("ubicacionButtons").style.display = "none";
+        document.getElementById("armaButtons").style.display = "none";
+        document.getElementById("opcionesAsesino").style.display = "none";
     });
 
     document.getElementById("armaBtn").addEventListener("click", function() {
         actualizarFondo("url('/clue/especificos/imagenes/armas.jpeg')");
         mostrarContenido("Armas: Daga, Báculo de mago, Arco, Espada, Poción venenosa");
         mostrarBotones(armas, "Arma");
-        
+        document.getElementById("ubicacionButtons").style.display = "none";
+        document.getElementById("personajeButtons").style.display = "none";
+        document.getElementById("opcionesAsesino").style.display = "none";
     });
 
     document.getElementById("botsel").addEventListener("click", function() {
@@ -141,9 +149,28 @@ var armas = [
         document.getElementById("ubicacionButtons").style.display = "none";
         document.getElementById("personajeButtons").style.display = "none";
         document.getElementById("armaButtons").style.display = "none";
+
         
     });
-
+    document.getElementById("botsel").addEventListener("click", function() {
+        // Mostrar el contenedor de opciones de asesino
+        document.getElementById("opcionesAsesino").style.display = "block";
+    });
+    
+    document.getElementById("asesino1Btn").addEventListener("click", function() {
+        // Aquí puedes realizar alguna acción al seleccionar Asesino 1
+        console.log("Asesino 1 seleccionado");
+    });
+    
+    document.getElementById("asesino2Btn").addEventListener("click", function() {
+        // Aquí puedes realizar alguna acción al seleccionar Asesino 2
+        console.log("Asesino 2 seleccionado");
+    });
+    
+    document.getElementById("asesino3Btn").addEventListener("click", function() {
+        // Aquí puedes realizar alguna acción al seleccionar Asesino 3
+        console.log("Asesino 3 seleccionado");
+    });
 
 });
 
