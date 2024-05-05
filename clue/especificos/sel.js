@@ -193,10 +193,10 @@ var armas = [
             if (comparar) {
                 alert("Excelente, lo has conseguido. ¡Es el asesino!");
                 // Redireccionar a otra página después de cerrar la alerta
-                window.location.href = "maincle.html";
+                window.location.href = "../mainclue.html";
             } else {
                 alert("Lo siento, no es el asesino.");
-                window.location.href = "maincle.html";
+                window.location.href = "../mainclue.html";
             }
         } else {
             console.log("Por favor selecciona un asesino antes de enviar.");
