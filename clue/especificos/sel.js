@@ -200,5 +200,7 @@ var armas = [
         // Ocultar el botón de enviar después de hacer clic
         document.getElementById("enviar-btn").style.display = "none";
     });
-    
+    function comparar(seleccion,historia){
+        
+    }
 });
