@@ -115,22 +115,12 @@ var armas = [
         container.style.alignItems = "center";
     }
 
-    document.getElementById("ubicacionBtn").addEventListener("click", function() {
-        actualizarFondo("url('/imagenes/mapa.jpeg')");
-    });
 
-    document.getElementById("botsel").addEventListener("click", function() {
-        alert("Seleccionar al asecino");
-        actualizarFondo("url('/clue/especificos/imagenes/bosque.jpeg')");
-    });
-
-    document.getElementById("ubicacionBtn").addEventListener("click", function() {
-        actualizarFondo("url('/imagenes/mapa.jpeg')");
-    });
     document.getElementById("ubicacionBtn").addEventListener("click", function() {
         actualizarFondo("url('/imagenes/mapa.jpeg')");
         mostrarContenido("Ubicaciones disponibles: Cascada, Hongos Gigantes, Arbol central, Pantano, Pinos de sobras");
         mostrarBotones(ubicaciones, "Ubicación");
+        
     });
 
     document.getElementById("personajeBtn").addEventListener("click", function() {
@@ -143,6 +133,15 @@ var armas = [
         actualizarFondo("url('/clue/especificos/imagenes/armas.jpeg')");
         mostrarContenido("Armas: Daga, Báculo de mago, Arco, Espada, Poción venenosa");
         mostrarBotones(armas, "Arma");
+        
+    });
+
+    document.getElementById("botsel").addEventListener("click", function() {
+        actualizarFondo("url('/clue/especificos/imagenes/bosque.jpeg')");
+        document.getElementById("ubicacionButtons").style.display = "none";
+        document.getElementById("personajeButtons").style.display = "none";
+        document.getElementById("armaButtons").style.display = "none";
+        
     });
 
 
