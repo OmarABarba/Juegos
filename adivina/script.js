@@ -125,37 +125,7 @@ fetch('personajes.json')
       }, 2000);
     }
 
-    function enviarRespuestasJson(nombre, respuestas) {
-      const nuevoPersonaje = {
-        nombre: nombre,
-        hombre: respuestas[0],
-        mujer: respuestas[1],
-        es_estudiante: respuestas[2],
-        es_profesor: respuestas[3],
-        es_mago_oscuro: respuestas[4],
-        es_muggle: respuestas[5],
-        es_personaje_principal: respuestas[6],
-        es_personaje_secundario: respuestas[7]
-      };
-
-      fetch('http://localhost:3000/agregar_personaje', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(nuevoPersonaje)
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error al agregar el nuevo personaje');
-        }
-        console.log('El nuevo personaje se ha agregado correctamente.');
-        reiniciarJuego();
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    }
+    
 
     // Agregar event listeners a los botones
     yesBtn.addEventListener('click', () => {
