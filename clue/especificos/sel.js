@@ -149,27 +149,33 @@ var armas = [
         document.getElementById("ubicacionButtons").style.display = "none";
         document.getElementById("personajeButtons").style.display = "none";
         document.getElementById("armaButtons").style.display = "none";
-
         
     });
+
+    let seleccionAsesino = "";
     document.getElementById("botsel").addEventListener("click", function() {
-        // Mostrar el contenedor de opciones de asesino
-        document.getElementById("opcionesAsesino").style.display = "block";
+        // Mostrar el menú desplegable de opciones de asesino
+        document.getElementById("opcionesAsesino").style.display = "inline";
     });
+
+
+    document.getElementById("opcionesAsesino").addEventListener("change", function() {
+        // Obtener el valor seleccionado del menú desplegable
+        let selectedOption = document.getElementById("opcionesAsesino").value;
+        console.log("Asesino seleccionado:", selectedOption);
     
-    document.getElementById("asesino1Btn").addEventListener("click", function() {
-        // Aquí puedes realizar alguna acción al seleccionar Asesino 1
-        console.log("Asesino 1 seleccionado");
-    });
+        //Aquí puedes realizar alguna acción basada en la opción seleccionada
+        //Por ejemplo:
+        if (selectedOption === "Asesino1") {
+            console.log("Asesino 1 seleccionado");
+        } else if (selectedOption === "Asesino2") {
+            console.log("Asesino 2 seleccionado");
+        } else if (selectedOption === "Asesino3") {
+            console.log("Asesino 3 seleccionado");
+        }
     
-    document.getElementById("asesino2Btn").addEventListener("click", function() {
-        // Aquí puedes realizar alguna acción al seleccionar Asesino 2
-        console.log("Asesino 2 seleccionado");
-    });
-    
-    document.getElementById("asesino3Btn").addEventListener("click", function() {
-        // Aquí puedes realizar alguna acción al seleccionar Asesino 3
-        console.log("Asesino 3 seleccionado");
+        // Ocultar el menú desplegable después de seleccionar una opción
+        document.getElementById("opcionesAsesino").style.display = "none";
     });
 
 });
