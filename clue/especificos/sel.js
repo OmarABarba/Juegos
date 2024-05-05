@@ -115,14 +115,14 @@ var armas = [
         container.style.alignItems = "center";
     }
 
-
     document.getElementById("ubicacionBtn").addEventListener("click", function() {
         actualizarFondo("url('/imagenes/mapa.jpeg')");
         mostrarContenido("Ubicaciones disponibles: Cascada, Hongos Gigantes, Arbol central, Pantano, Pinos de sobras");
         mostrarBotones(ubicaciones, "Ubicación");
-        document.getElementById("armaButtons").style.display = "none";
-        document.getElementById("personajeButtons").style.display = "none";
-        document.getElementById("opcionesAsesino").style.display = "none";
+        document.getElementById("enviar-btn").style.display = "none";
+        document.getElementById("opcionesPersonaje").style.display = "none";
+        document.getElementById("opcionesArma").style.display = "none";
+        document.getElementById("opcionesLugar").style.display = "none";
         
     });
 
@@ -130,52 +130,75 @@ var armas = [
         actualizarFondo("url('/clue/especificos/imagenes/personajes2.jpeg')");
         mostrarContenido("Personajes: Bruja, Ogro, Cazador, Mago, Hobbit");
         mostrarBotones(personajes, "Personaje");
-        document.getElementById("ubicacionButtons").style.display = "none";
-        document.getElementById("armaButtons").style.display = "none";
-        document.getElementById("opcionesAsesino").style.display = "none";
+        document.getElementById("enviar-btn").style.display = "none";
+        document.getElementById("opcionesPersonaje").style.display = "none";
+        document.getElementById("opcionesArma").style.display = "none";
+        document.getElementById("opcionesLugar").style.display = "none";
     });
 
     document.getElementById("armaBtn").addEventListener("click", function() {
         actualizarFondo("url('/clue/especificos/imagenes/armas.jpeg')");
         mostrarContenido("Armas: Daga, Báculo de mago, Arco, Espada, Poción venenosa");
         mostrarBotones(armas, "Arma");
-        document.getElementById("ubicacionButtons").style.display = "none";
-        document.getElementById("personajeButtons").style.display = "none";
-        document.getElementById("opcionesAsesino").style.display = "none";
+        document.getElementById("enviar-btn").style.display = "none";
+        document.getElementById("opcionesPersonaje").style.display = "none";
+        document.getElementById("opcionesArma").style.display = "none";
+        document.getElementById("opcionesLugar").style.display = "none";
     });
 
+
+    let seleccion = {
+        personaje:"", 
+        lugar:"",
+        arma:""
+    };
+    
+    document.getElementById("enviar-btn").style.display = "none";
+
     document.getElementById("botsel").addEventListener("click", function() {
+        mostrarContenido("Selecciona los valores para ver si descubriste al asesino");
         actualizarFondo("url('/clue/especificos/imagenes/bosque.jpeg')");
         document.getElementById("ubicacionButtons").style.display = "none";
         document.getElementById("personajeButtons").style.display = "none";
         document.getElementById("armaButtons").style.display = "none";
         
+        // Mostrar el menú desplegable de opciones de asesino
+        document.getElementById("opcionesPersonaje").style.display = "inline";
+        document.getElementById("opcionesArma").style.display = "inline";
+        document.getElementById("opcionesLugar").style.display = "inline";
+        // Mostrar el botón de enviar solo cuando se presiona "Seleccionar asesino"
+        document.getElementById("enviar-btn").style.display = "inline";
+    });
+    
+    document.getElementById("opcionesPersonaje").addEventListener("change", function() {
+        // Obtener el valor seleccionado del menú desplegable
+        seleccion.personaje = document.getElementById("opcionesPersonaje").value;
+    });
+    document.getElementById("opcionesArma").addEventListener("change", function() {
+        // Obtener el valor seleccionado del menú desplegable y almacenarlo en el objeto de selección
+        seleccion.arma = document.getElementById("opcionesArma").value;
+    });
+    
+    document.getElementById("opcionesLugar").addEventListener("change", function() {
+        // Obtener el valor seleccionado del menú desplegable y almacenarlo en el objeto de selección
+        seleccion.lugar = document.getElementById("opcionesLugar").value;
     });
 
-    let seleccionAsesino = "";
-    document.getElementById("botsel").addEventListener("click", function() {
-        // Mostrar el menú desplegable de opciones de asesino
-        document.getElementById("opcionesAsesino").style.display = "inline";
-    });
-    
-    document.getElementById("opcionesAsesino").addEventListener("change", function() {
-        // Obtener el valor seleccionado del menú desplegable
-        seleccionAsesino = document.getElementById("opcionesAsesino").value;
-    });
-    
     document.getElementById("enviar-btn").addEventListener("click", function() {
-        if (seleccionAsesino !== "") {
-            console.log("Asesino seleccionado:", seleccionAsesino);
-            //Aquí puedes realizar alguna acción adicional si es necesario
+        if (seleccion.personaje !== "" && seleccion.arma !== "" && seleccion.lugar !== "") {
+            console.log("Selección completa:", seleccion);
+            // Aquí puedes realizar alguna acción adicional si es necesario
         } else {
             console.log("Por favor selecciona un asesino antes de enviar.");
+            alert("Por favor selecciona un asesino antes de enviar.");
         }
         // Ocultar el menú desplegable después de seleccionar una opción y hacer clic en enviar
-        document.getElementById("opcionesAsesino").style.display = "none";
+        document.getElementById("opcionesPersonaje").style.display = "none";
+        document.getElementById("opcionesPersonaje").style.display = "none";
+        document.getElementById("opcionesArma").style.display = "none";
+        document.getElementById("opcionesLugar").style.display = "none";
+        // Ocultar el botón de enviar después de hacer clic
+        document.getElementById("enviar-btn").style.display = "none";
     });
-
+    
 });
-
-
-
-
