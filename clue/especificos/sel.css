@@ -3,10 +3,10 @@ body {
     padding: 0;
     background-color: black; 
     color: black;  
-    /* background-image: url(/clue/especificos/imagenes/bosque.jpeg); 
-    /* background-size: cover;  */
-    /* background-position: top center; 
-    background-attachment:scroll; */
+    background-image: url(/clue/especificos/imagenes/bosque.jpeg); 
+    background-size: cover; 
+    background-position: top center; 
+    background-attachment:scroll;
     background-repeat: no-repeat; 
     background-size: auto; 
     background-position: center top; /* Centra la imagen de fondo en horizontal y la posiciona en la parte inferior */
