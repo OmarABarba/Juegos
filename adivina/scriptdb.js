@@ -13,7 +13,7 @@ const questions = [
 
 let currentQuestionIndex = 0; // Inicializamos el índice de la pregunta actual
 let userAnswers = [];
-var valuesArray = [];
+let valuesArray = [];
 
 const questionElement = document.getElementById('question');
 const yesBtn = document.getElementById('yesBtn');
@@ -21,7 +21,7 @@ const noBtn = document.getElementById('noBtn');
 
 function askQuestion() {
     questionElement.textContent = questions[currentQuestionIndex];
-    verContenidoDB();
+    
 }
 
 function nextQuestion(answer) {
@@ -38,15 +38,17 @@ function nextQuestion(answer) {
 
 function finishGame() {
     console.log("Respuestas del usuario:", userAnswers);
-    
+    verContenidoDB();
+    console.log(valuesArray)
     comparar();
     
 }
+// console.log("Valores de la base de datos:", valuesArray);
+
 function comparar() {
     let usuario=[{
         hombre:"", 
         mujer:"",
-        arma:"",
         es_estudiante:"",
         es_profesor:"",
         es_mago_oscuro: "", 
@@ -58,21 +60,25 @@ function comparar() {
         for (let i = 0; i < usuario.length; i++) {
             usuario[i].hombre = userAnswers[0];
             usuario[i].mujer = userAnswers[1];
-            usuario[i].arma = userAnswers[2];
-            usuario[i].es_estudiante = userAnswers[3];
-            usuario[i].es_profesor = userAnswers[4];
-            usuario[i].es_mago_oscuro = userAnswers[5];
-            usuario[i].es_muggle = userAnswers[6];
-            usuario[i].es_personaje_principal = userAnswers[7];
-            usuario[i].es_personaje_secundario = userAnswers[8];
+            usuario[i].es_estudiante = userAnswers[2];
+            usuario[i].es_profesor = userAnswers[3];
+            usuario[i].es_mago_oscuro = userAnswers[4];
+            usuario[i].es_muggle = userAnswers[5];
+            usuario[i].es_personaje_principal = userAnswers[6];
+            usuario[i].es_personaje_secundario = userAnswers[7];
         }
         
     
-    userAnswers
-    console.log("Respuestas del usuario:", usuario);
-    console.log("Valores de la base de datos:", valuesArray);
     
+    console.log("Respuestas del usuario:", usuario);
+    console.log("Respuestas db:", valuesArray);
+    
+    const valoresHombre = [];
+for (let i = 0; i < valuesArray.length; i++) {
+  valoresHombre.push(valuesArray[i].hombre);
+}
 
+console.log(valoresHombre);
 }
 
 

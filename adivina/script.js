@@ -122,7 +122,7 @@ fetch('personajes.json')
     function reiniciarJuego() {
       setTimeout(() => {
         location.reload(); 
-      }, 2000);
+      }, 10000);
     }
 
     
