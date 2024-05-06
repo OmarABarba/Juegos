@@ -53,5 +53,60 @@
     "es_muggle": true,
     "es_personaje_principal": false,
     "es_personaje_secundario": true
-    }
+    },
+{
+    "nombre": "Ron Weasley",
+    "hombre": true,
+    "mujer": false,
+    "es_estudiante": true,
+    "es_profesor": false,
+    "es_mago_oscuro": false,
+    "es_muggle": false,
+    "es_personaje_principal": true,
+    "es_personaje_secundario": false
+},
+{
+    "nombre": "Minerva McGonagall",
+    "hombre": false,
+    "mujer": true,
+    "es_estudiante": false,
+    "es_profesor": true,
+    "es_mago_oscuro": false,
+    "es_muggle": false,
+    "es_personaje_principal": false,
+    "es_personaje_secundario": true
+},
+{
+    "nombre": "Bellatrix Lestrange",
+    "hombre": false,
+    "mujer": true,
+    "es_estudiante": false,
+    "es_profesor": false,
+    "es_mago_oscuro": true,
+    "es_muggle": false,
+    "es_personaje_principal": false,
+    "es_personaje_secundario": false
+},
+{
+    "nombre": "Neville Longbottom",
+    "hombre": true,
+    "mujer": false,
+    "es_estudiante": true,
+    "es_profesor": false,
+    "es_mago_oscuro": false,
+    "es_muggle": false,
+    "es_personaje_principal": true,
+    "es_personaje_secundario": false
+},
+{
+    "nombre": "Petunia Dursley",
+    "hombre": false,
+    "mujer": true,
+    "es_estudiante": false,
+    "es_profesor": false,
+    "es_mago_oscuro": false,
+    "es_muggle": true,
+    "es_personaje_principal": false,
+    "es_personaje_secundario": true
+}
 ]

@@ -70,15 +70,14 @@ function comparar() {
         
     
     
-    console.log("Respuestas del usuario:", usuario);
-    console.log("Respuestas db:", valuesArray);
-    
-    const valoresHombre = [];
-for (let i = 0; i < valuesArray.length; i++) {
-  valoresHombre.push(valuesArray[i].hombre);
-}
-
-console.log(valoresHombre);
+        console.log("Respuestas del usuario:", usuario);
+        console.log("Respuestas db:", valuesArray);
+        const valoresBooleanosPorIndice = valuesArray.map(objeto => {
+            return Object.values(objeto).filter(valor => typeof valor === 'boolean');
+        });
+        console.log("Valores booleanos por índice:", valoresBooleanosPorIndice);
+        const valoresBooleanos = valoresBooleanosPorIndice.flat();
+        console.log("Valores booleanos:", valoresBooleanos);
 }
 
 
