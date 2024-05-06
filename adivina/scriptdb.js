@@ -1,35 +1,31 @@
-const sqlite3 = require('sqlite3').verbose();
+let db;
+const request = window.indexedDB.open('personajes');
 
-// Conectar a la base de datos SQLite
-const db = new sqlite3.Database('tu_base_de_datos.db');
+request.onerror = function(event) {
+  console.error('Error al abrir la base de datos:', event.target.errorCode);
+};
 
-// Función para recuperar los personajes de la base de datos
-function obtenerPersonajes(callback) {
-    const query = "SELECT * FROM personajes";
-    db.all(query, (err, rows) => {
-        if (err) {
-            console.error('Error al obtener los personajes:', err);
-            return;
-        }
-        callback(rows);
-    });
-}
+request.onsuccess = function(event) {
+  console.log('Base de datos abierta correctamente');
+  db = event.target.result;
 
-// En lugar de cargar desde JSON, obtener personajes de la base de datos
-db.serialize(() => {
-    obtenerPersonajes((personajes) => {
-        // Tu lógica de juego aquí
-    });
-});
+  const transaction = db.transaction(['personajes'], 'readonly');
+  const objectStore = transaction.objectStore('personajes');
+  const getRequest = objectStore.getAll();
 
-// Función para insertar un nuevo personaje en la base de datos
-function insertarNuevoPersonaje(nombre, respuestas) {
-    const query = "INSERT INTO personajes (nombre, respuesta1, respuesta2, ...) VALUES (?, ?, ?, ...)";
-    db.run(query, [nombre, ...respuestas], (err) => {
-        if (err) {
-            console.error('Error al insertar nuevo personaje:', err);
-            return;
-        }
-        console.log('Nuevo personaje insertado correctamente.');
-    });
-}
+  getRequest.onsuccess = function(event) {
+    const data = event.target.result;
+    console.log('Datos recuperados correctamente:', data);
+  };
+};
+
+request.onupgradeneeded = function(event) {
+  const db = event.target.result;
+  const objectStore = db.createObjectStore('personajes', { keyPath: 'id', autoIncrement:true });
+  
+  console.log('Base de datos creada correctamente');
+  // Aquí puedes agregar la lógica para crear y poblar la base de datos
+};
+
+
+
