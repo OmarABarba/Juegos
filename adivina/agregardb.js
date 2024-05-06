@@ -6,7 +6,7 @@ function leerJSON() {
   const url = 'personajes.json';
 
   // Realizar la petición para obtener el archivo JSON
-  fetch(url)
+  return fetch(url)
     .then(response => {
       // Verificar si la respuesta es correcta
       if (!response.ok) {
@@ -25,20 +25,12 @@ function leerJSON() {
     });
 }
 
-// Llamar a la función para leer el archivo JSON
-leerJSON();
-
 // Ejemplo de uso de los datos globalmente
 // Puedes acceder a los datosJSON en cualquier parte de tu código después de que se haya resuelto la promesa
-setTimeout(function() {
-  // Acceder a los datos almacenados globalmente
-  console.log(datosJSON);
-  // Por ejemplo, puedes iterar sobre los datos
-  datosJSON.forEach(persona => {
-    console.log(`Nombre: ${persona.nombre}, Edad: ${persona.edad}`);
-  });
-}, 2000); // Espera 2 segundos para asegurarte de que los datos se han obtenido y almacenado
-
+leerJSON().then(() => {
+  // Llamar a la función para abrir la base de datos una vez que se hayan obtenido los datos JSON
+  abrirBaseDatos();
+});
 
 //-------------------------------ALMACENAR VALORES JSON----------------------------------------------------//
 
@@ -82,5 +74,3 @@ function abrirBaseDatos() {
     console.error('Error al abrir la base de datos:', event.target.errorCode);
   };
 }
-
-setTimeout(abrirBaseDatos(),2500);

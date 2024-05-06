@@ -1,28 +1,24 @@
-function comprobaciondb(nombreDB, archivoJS) {
-    // Intentar abrir la base de datos
-    var solicitud = window.indexedDB.open(nombreDB);
-
-    // Manejar el evento de éxito cuando la base de datos existe
-    solicitud.onsuccess = function(event) {
-        console.log("La base de datos existe, no se ejecutará otro archivo JavaScript.");
-    };
-
-    // Manejar el evento de error cuando la base de datos no existe
-    solicitud.onerror = function(event) {
-        // Si hay un error al abrir la base de datos, ejecutar el archivo JavaScript especificado
-        var script = document.createElement('script');
-        script.src = archivoJS;
-        document.head.appendChild(script);
-    };
+var bd;
+function abrir(){
+    var solicitud = indexedDB.open("personajesdb");
+    solicitud.addEventListener("error",Mosterror);
+    solicitud.addEventListener("success",comenzar);
+    solicitud.addEventListener("upgradeneeded",crear);
 }
 
-// Llamar a la función con el nombre de la base de datos y el nombre del archivo JavaScript
-comprobaciondb("personajesdb", "agregardb.js");
+function Mosterror(evento){
+    alert("Tenemos error");
+}
+function comenzar(evento){
+    bd = evento.target.result;
+}
+function crear(evento) {
+    bd = evento.target.result;
+    agregardb();
+    }
 
-
-
-
-
+window.addEventListener("load",abrir);
+// ----------------------------------------------Adivina--------------------------------------//
 const questions = [
     "¿Es hombre?",
     "¿Es mujer?",
@@ -33,3 +29,41 @@ const questions = [
     "¿Es un personaje principal?",
     "¿Es un personaje secundario?"
   ];
+
+let currentQuestionIndex = 0; // Inicializamos el índice de la pregunta actual
+let userAnswers = [];
+
+const questionElement = document.getElementById('question');
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+
+function askQuestion() {
+    questionElement.textContent = questions[currentQuestionIndex];
+}
+
+function nextQuestion(answer) {
+      userAnswers.push(answer);
+      currentQuestionIndex++;
+      if (currentQuestionIndex >= questions.length) {
+          finishGame();
+      } else {
+          askQuestion();
+      }
+  }
+
+  function finishGame() {
+      // Aquí puedes hacer algo con las respuestas del usuario almacenadas en userAnswers
+      // Por ejemplo, imprimir las respuestas en la consola
+      console.log("Respuestas del usuario:", userAnswers);
+  }
+
+  yesBtn.addEventListener('click', () => {
+      nextQuestion(true);
+  });
+
+  noBtn.addEventListener('click', () => {
+      nextQuestion(false);
+  });
+
+  // Comenzamos el juego
+  askQuestion();
