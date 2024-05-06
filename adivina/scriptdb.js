@@ -46,45 +46,41 @@ function finishGame() {
 // console.log("Valores de la base de datos:", valuesArray);
 
 function comparar() {
-    let usuario=[{
-        hombre:"", 
-        mujer:"",
-        es_estudiante:"",
-        es_profesor:"",
-        es_mago_oscuro: "", 
-        es_muggle: "", 
-        es_personaje_principal: "", 
-        es_personaje_secundario:""
-        
-        }]
-        for (let i = 0; i < usuario.length; i++) {
-            usuario[i].hombre = userAnswers[0];
-            usuario[i].mujer = userAnswers[1];
-            usuario[i].es_estudiante = userAnswers[2];
-            usuario[i].es_profesor = userAnswers[3];
-            usuario[i].es_mago_oscuro = userAnswers[4];
-            usuario[i].es_muggle = userAnswers[5];
-            usuario[i].es_personaje_principal = userAnswers[6];
-            usuario[i].es_personaje_secundario = userAnswers[7];
-        }
-        
-    
-    
-        console.log("Respuestas del usuario:", usuario);
-        console.log("Respuestas db:", valuesArray);
-        const valoresBooleanosPorIndice = valuesArray.map(objeto => {
-            return Object.values(objeto).filter(valor => typeof valor === 'boolean');
-        });
-        console.log("Valores booleanos por índice:", valoresBooleanosPorIndice);
+    let usuario = {
+        hombre: userAnswers[0],
+        mujer: userAnswers[1],
+        es_estudiante: userAnswers[2],
+        es_profesor: userAnswers[3],
+        es_mago_oscuro: userAnswers[4],
+        es_muggle: userAnswers[5],
+        es_personaje_principal: userAnswers[6],
+        es_personaje_secundario: userAnswers[7]
+    };
 
-        const indice = encontrarVectorEnMatriz(userAnswers, valoresBooleanosPorIndice);
-        if (indice !== -1) {
-            console.log("El vector se encontró en la fila:", indice);
-        } else {
-            console.log("El vector no se encontró en la matriz.");
-        }
-        
+    console.log("Respuestas del usuario:", usuario);
+    console.log("Respuestas db:", valuesArray);
+
+    if (valuesArray.length === 0) {
+        console.log("Aún no se han cargado los datos de la base de datos.");
+        return;
+    }
+
+    const valoresBooleanosPorIndice = valuesArray.map(objeto => {
+        return Object.values(objeto).filter(valor => typeof valor === 'boolean');
+    });
+
+    console.log("Valores booleanos por índice:", valoresBooleanosPorIndice);
+
+    const indice = encontrarVectorEnMatriz(userAnswers, valoresBooleanosPorIndice);
+    if (indice !== -1) {
+        console.log("El vector se encontró en la fila:", indice);
+        const nombrePersonaje = valuesArray[indice].nombre; // Suponiendo que el nombre del personaje está almacenado en la propiedad 'nombre' de cada objeto en valuesArray
+        alert("El personaje es: " + nombrePersonaje);
+    } else {
+        console.log("El vector no se encontró en la matriz.");
+    }
 }
+
 
 
 
