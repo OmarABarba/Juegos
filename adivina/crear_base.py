@@ -1,11 +1,16 @@
 import sqlite3
 import json
+import os 
 
 # Nombre del archivo JSON
 archivo_json = r"C:\Users\barba\Documents\GitHub\Juegos\adivina\personajes.json"
 
+#misma ruta del json
+ruta_json = os.path.dirname(archivo_json)
 # Nombre de la base de datos SQLite
 nombre_base_datos = "personajes.db"
+# Ruta completa para la base de datos SQLite
+ruta_base_datos = os.path.join(ruta_json, nombre_base_datos)
 
 # Función para crear la tabla y insertar los datos
 def crear_tabla_insertar_datos():
