@@ -83,4 +83,4 @@ function abrirBaseDatos() {
   };
 }
 
-abrirBaseDatos();
+setTimeout(abrirBaseDatos(),2500);
