@@ -1,13 +1,63 @@
+var datosJSON = [];
+
+// Función para leer el archivo JSON y almacenar los datos globalmente
+function leerJSON() {
+  // Ruta del archivo JSON
+  const url = 'personajes.json';
+
+  // Realizar la petición para obtener el archivo JSON
+  fetch(url)
+    .then(response => {
+      // Verificar si la respuesta es correcta
+      if (!response.ok) {
+        throw new Error('Error al obtener el archivo JSON');
+      }
+      // Parsear el cuerpo de la respuesta como JSON
+      return response.json();
+    })
+    .then(data => {
+      // Almacenar los datos JSON en la variable global
+      datosJSON = data;
+    })
+    .catch(error => {
+      // Manejar los errores
+      console.error('Error:', error);
+    });
+}
+
+// Llamar a la función para leer el archivo JSON
+leerJSON();
+
+// Ejemplo de uso de los datos globalmente
+// Puedes acceder a los datosJSON en cualquier parte de tu código después de que se haya resuelto la promesa
+setTimeout(function() {
+  // Acceder a los datos almacenados globalmente
+  console.log(datosJSON);
+  // Por ejemplo, puedes iterar sobre los datos
+  datosJSON.forEach(persona => {
+    console.log(`Nombre: ${persona.nombre}, Edad: ${persona.edad}`);
+  });
+}, 2000); // Espera 2 segundos para asegurarte de que los datos se han obtenido y almacenado
+
+
+//-------------------------------ALMACENAR VALORES JSON----------------------------------------------------//
+
 var db;
+
 function abrirBaseDatos() {
-  const request = window.indexedDB.open('personajesdb', 2); // Versión 2
+  console.log("se esta ejecutando")
+  const request = window.indexedDB.open('personajesdb');
 
   request.onupgradeneeded = function(event) {
     const db = event.target.result;
     const objectStore = db.createObjectStore('personajes', { keyPath: 'id', autoIncrement: true });
-    // Insertar datos de prueba
-    objectStore.add({ nombre: 'Harry Potter', hombre: true, mujer: false, es_estudiante: true, es_profesor: false, es_mago_oscuro: false, es_muggle: false, es_personaje_principal: true, es_personaje_secundario: false });
-    objectStore.add({ nombre: 'Severus Snape', hombre: true, mujer: false, es_estudiante: false, es_profesor: true, es_mago_oscuro: true, es_muggle: false, es_personaje_principal: false, es_personaje_secundario: true });
+
+    // Insertar datos desde un JSON
+    const datos = datosJSON
+
+    datos.forEach(function(personaje) {
+      objectStore.add(personaje);
+    });
   };
 
   request.onsuccess = function(event) {
@@ -26,6 +76,10 @@ function abrirBaseDatos() {
         console.log('No hay más datos');
       }
     };
+  };
+
+  request.onerror = function(event) {
+    console.error('Error al abrir la base de datos:', event.target.errorCode);
   };
 }
 
