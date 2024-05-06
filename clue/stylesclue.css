@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url(/clue/imagenes/bosque.jpeg); 
+    background-image: url(/imagenes/bosque.jpeg); 
     /* background-size: cover;  */
     background-position: top center; 
     background-attachment:scroll;
@@ -82,9 +82,9 @@ h1 {
     overflow: hidden;
 
     position: absolute;
-    top: 550px; 
-    left: 660px;
-    
+    top: 85%; 
+    left:51%;
+    transform: translate(-50%, -50%);
 }
 
 .boton-select::after {
@@ -112,14 +112,17 @@ h1 {
     transform: translate(-50%, -50%);
     width: 60px;
     height: 60px;
+    
 }
 
 .boton-select svg path {
     fill: white;
+    
 }
 
 .boton-select img,
 .boton-select object {
     width: 200px; /* ajusta el ancho según sea necesario */
     height: 200px; /* ajusta la altura según sea necesario */
+    
 }

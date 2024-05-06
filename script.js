@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     var body = document.body;
-    var images = ["clue/imagenes/intro.jpeg", "/clue/imagenes/juego.jpeg"]; // Rutas de las imágenes
+    var images = ["/imagenes/intro.jpeg", "/imagenes/juego.jpeg"]; // Rutas de las imágenes
     var currentIndex = 0;
     
     setInterval(function() {
