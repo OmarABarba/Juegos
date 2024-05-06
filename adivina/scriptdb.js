@@ -1,24 +1,4 @@
-var bd;
-function abrir(){
-    var solicitud = indexedDB.open("personajesdb");
-    solicitud.addEventListener("error",Mosterror);
-    solicitud.addEventListener("success",comenzar);
-    solicitud.addEventListener("upgradeneeded",crear);
-}
 
-function Mosterror(evento){
-    alert("Tenemos error");
-}
-function comenzar(evento){
-    bd = evento.target.result;
-    console.log("all fine")
-}
-function crear(evento) {
-    bd = evento.target.result;
-    agregardb();
-    }
-
-window.addEventListener("load",abrir);
 // ----------------------------------------------Adivina--------------------------------------//
 const questions = [
     "¿Es hombre?",
@@ -54,42 +34,32 @@ function nextQuestion(answer) {
 
 function finishGame() {
     console.log("Respuestas del usuario:", userAnswers);
-    comparardb(userAnswers);
+    compararVariableConDB(userAnswers);
     
 }
-function comparardb(userAnswers) {
-    var transaccion = bd.transaction(["personajes"], "readonly");
-    var almacen = transaccion.objectStore("personajes");
-    var solicitud = almacen.get(clave);
+function compararVariableConDB(valor) {
+    var transaction = bd.transaction(['personajes'], 'readonly');
+    var objectStore = transaction.objectStore('personajes');
+    var cursorRequest = objectStore.openCursor();
 
-    solicitud.addEventListener("success", function(event) {
-        var objeto = event.target.result;
-        if (objeto) {
-            var valorAlmacenado = objeto.valor;
-            // Aquí puedes comparar valorAlmacenado con las respuestas del usuario, por ejemplo:
-            if (arraysIguales(userAnswers, valorAlmacenado)) {
-                console.log("Las respuestas del usuario son iguales al valor almacenado en IndexedDB.");
-            } else {
-                console.log("Las respuestas del usuario no son iguales al valor almacenado en IndexedDB.");
+    cursorRequest.onsuccess = function(event) {
+        var cursor = event.target.result;
+        if(cursor) {
+            // Compara la variable con los valores de la base de datos
+            if (cursor.value === valor) {
+                console.log("La variable coincide con un valor en la base de datos: " + JSON.stringify(cursor.value));
             }
+            cursor.continue();
         } else {
-            console.log("No se encontró ningún objeto con la clave especificada en IndexedDB.");
+            console.log("Fin de los datos");
         }
-    });
+    };
+
+    cursorRequest.onerror = function(event) {
+        console.log("Error al abrir el cursor:", event.target.error);
+    };
 }
 
-// Función para comparar dos arrays
-function arraysIguales(arr1, arr2) {
-    if (arr1.length !== arr2.length) {
-        return false;
-    }
-    for (var i = 0; i < arr1.length; i++) {
-        if (arr1[i] !== arr2[i]) {
-            return false;
-        }
-    }
-    return true;
-}
 
 
 yesBtn.addEventListener('click', () => {
@@ -101,7 +71,30 @@ noBtn.addEventListener('click', () => {
 });
 
   // Comenzamos el juego
-askQuestion();
 
 
 
+//---------------------CONEXION------------------//
+var bd;
+function abrir(){
+    var solicitud = indexedDB.open("personajesdb");
+    solicitud.addEventListener("error",Mosterror);
+    solicitud.addEventListener("success",comenzar);
+    solicitud.addEventListener("upgradeneeded",crear);
+}
+
+function Mosterror(evento){
+    alert("Tenemos error");
+}
+function comenzar(evento){
+    bd = evento.target.result;
+    console.log("all fine");
+    askQuestion();
+    
+}
+function crear(evento) {
+    bd = evento.target.result;
+    agregardb();
+    }
+
+window.addEventListener("load",abrir);
