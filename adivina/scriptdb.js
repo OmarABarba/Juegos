@@ -34,24 +34,24 @@ function nextQuestion(answer) {
 
 function finishGame() {
     console.log("Respuestas del usuario:", userAnswers);
-    compararVariableConDB(userAnswers);
+    verContenidoDB();
     
 }
-function compararVariableConDB(valor) {
+function verContenidoDB() {
     var transaction = bd.transaction(['personajes'], 'readonly');
     var objectStore = transaction.objectStore('personajes');
     var cursorRequest = objectStore.openCursor();
+    
+    var valuesArray = []; // Matriz para almacenar los valores
 
     cursorRequest.onsuccess = function(event) {
         var cursor = event.target.result;
-        if(cursor) {
-            // Compara la variable con los valores de la base de datos
-            if (cursor.value === valor) {
-                console.log("La variable coincide con un valor en la base de datos: " + JSON.stringify(cursor.value));
-            }
+        if (cursor) {
+            valuesArray.push(cursor.value); // Agregar los datos a la matriz
             cursor.continue();
         } else {
             console.log("Fin de los datos");
+            console.log(valuesArray); // Imprimir la matriz completa
         }
     };
 
@@ -59,6 +59,8 @@ function compararVariableConDB(valor) {
         console.log("Error al abrir el cursor:", event.target.error);
     };
 }
+
+
 
 
 
