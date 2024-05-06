@@ -39,7 +39,7 @@ function nextQuestion(answer) {
 function finishGame() {
     console.log("Respuestas del usuario:", userAnswers);
     verContenidoDB();
-    console.log(valuesArray)
+    // console.log(valuesArray)
     comparar();
     
 }
@@ -76,11 +76,39 @@ function comparar() {
             return Object.values(objeto).filter(valor => typeof valor === 'boolean');
         });
         console.log("Valores booleanos por índice:", valoresBooleanosPorIndice);
-        const valoresBooleanos = valoresBooleanosPorIndice.flat();
-        console.log("Valores booleanos:", valoresBooleanos);
+
+        const indice = encontrarVectorEnMatriz(userAnswers, valoresBooleanosPorIndice);
+        if (indice !== -1) {
+            console.log("El vector se encontró en la fila:", indice);
+        } else {
+            console.log("El vector no se encontró en la matriz.");
+        }
+        
 }
 
 
+
+function encontrarVectorEnMatriz(vector, matriz) {
+    for (let i = 0; i < matriz.length; i++) {
+        const fila = matriz[i];
+        if (fila.length !== vector.length) {
+            continue; // Si las longitudes no son iguales, pasa a la siguiente fila
+        }
+        let esIgual = true;
+        for (let j = 0; j < fila.length; j++) {
+            if (fila[j] !== vector[j]) {
+                esIgual = false;
+                break; // Si un elemento no coincide, marca como no igual y sal del bucle
+            }
+        }
+        if (esIgual) {
+            return i; // Si encontramos una fila igual al vector, devolvemos su índice
+        }
+    }
+    return -1; // Si no se encuentra el vector en la matriz, devolvemos -1
+}
+
+let isFinishGameCalled = false;
 function verContenidoDB() {
     var transaction = bd.transaction(['personajes'], 'readonly');
     var objectStore = transaction.objectStore('personajes');
@@ -93,7 +121,10 @@ function verContenidoDB() {
             cursor.continue();
         } else {
             console.log("Fin de los datos");
-            // console.log(valuesArray); // Imprimir la matriz completa
+            if (!isFinishGameCalled) {
+                finishGame(); // Llamar finishGame solo cuando todos los datos están listos y si no ha sido llamado antes
+                isFinishGameCalled = true; // Establecer la bandera a true para indicar que finishGame() ya fue llamado
+            }
         }
     return valuesArray;
     };
