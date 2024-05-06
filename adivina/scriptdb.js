@@ -28,7 +28,7 @@ const questions = [
     "¿Es un muggle?",
     "¿Es un personaje principal?",
     "¿Es un personaje secundario?"
-  ];
+];
 
 let currentQuestionIndex = 0; // Inicializamos el índice de la pregunta actual
 let userAnswers = [];
@@ -42,28 +42,29 @@ function askQuestion() {
 }
 
 function nextQuestion(answer) {
-      userAnswers.push(answer);
-      currentQuestionIndex++;
-      if (currentQuestionIndex >= questions.length) {
-          finishGame();
-      } else {
-          askQuestion();
-      }
-  }
+    userAnswers.push(answer);
+    currentQuestionIndex++;
+    if (currentQuestionIndex >= questions.length) {
+        finishGame();
+    } else {
+        askQuestion();
+    }
+}
 
-  function finishGame() {
+function finishGame() {
       // Aquí puedes hacer algo con las respuestas del usuario almacenadas en userAnswers
       // Por ejemplo, imprimir las respuestas en la consola
-      console.log("Respuestas del usuario:", userAnswers);
-  }
+    console.log("Respuestas del usuario:", userAnswers);
+}
 
-  yesBtn.addEventListener('click', () => {
-      nextQuestion(true);
-  });
+yesBtn.addEventListener('click', () => {
+    nextQuestion(true);
+});
 
-  noBtn.addEventListener('click', () => {
-      nextQuestion(false);
-  });
+noBtn.addEventListener('click', () => {
+    nextQuestion(false);
+});
 
   // Comenzamos el juego
-  askQuestion();
+askQuestion();
+
