@@ -11,6 +11,7 @@ function Mosterror(evento){
 }
 function comenzar(evento){
     bd = evento.target.result;
+    console.log("all fine")
 }
 function crear(evento) {
     bd = evento.target.result;
@@ -52,10 +53,44 @@ function nextQuestion(answer) {
 }
 
 function finishGame() {
-      // Aquí puedes hacer algo con las respuestas del usuario almacenadas en userAnswers
-      // Por ejemplo, imprimir las respuestas en la consola
     console.log("Respuestas del usuario:", userAnswers);
+    comparardb(userAnswers);
+    
 }
+function comparardb(userAnswers) {
+    var transaccion = bd.transaction(["personajes"], "readonly");
+    var almacen = transaccion.objectStore("personajes");
+    var solicitud = almacen.get(clave);
+
+    solicitud.addEventListener("success", function(event) {
+        var objeto = event.target.result;
+        if (objeto) {
+            var valorAlmacenado = objeto.valor;
+            // Aquí puedes comparar valorAlmacenado con las respuestas del usuario, por ejemplo:
+            if (arraysIguales(userAnswers, valorAlmacenado)) {
+                console.log("Las respuestas del usuario son iguales al valor almacenado en IndexedDB.");
+            } else {
+                console.log("Las respuestas del usuario no son iguales al valor almacenado en IndexedDB.");
+            }
+        } else {
+            console.log("No se encontró ningún objeto con la clave especificada en IndexedDB.");
+        }
+    });
+}
+
+// Función para comparar dos arrays
+function arraysIguales(arr1, arr2) {
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
+    for (var i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 yesBtn.addEventListener('click', () => {
     nextQuestion(true);
@@ -67,4 +102,6 @@ noBtn.addEventListener('click', () => {
 
   // Comenzamos el juego
 askQuestion();
+
+
 
