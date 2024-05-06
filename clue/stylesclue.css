@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url(/imagenes/bosque.jpeg); 
+    background-image: url(/clue/imagenes/bosque.jpeg); 
     /* background-size: cover;  */
     background-position: top center; 
     background-attachment:scroll;
