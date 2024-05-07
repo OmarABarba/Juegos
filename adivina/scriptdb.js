@@ -19,6 +19,14 @@ const questionElement = document.getElementById('question');
 const yesBtn = document.getElementById('yesBtn');
 const noBtn = document.getElementById('noBtn');
 
+function resetGame() {
+    currentQuestionIndex = 0;
+    userAnswers = [];
+    valuesArray = [];
+    isFinishGameCalled = false;
+    location.reload();
+}
+
 function askQuestion() {
     questionElement.textContent = questions[currentQuestionIndex];
     
@@ -33,8 +41,6 @@ function nextQuestion(answer) {
         askQuestion();
     }
 }
-
-
 
 function finishGame() {
     console.log("Respuestas del usuario:", userAnswers);
@@ -78,6 +84,9 @@ function comparar() {
         alert("El personaje es: " + nombrePersonaje);
     } else {
         console.log("El vector no se encontró en la matriz.");
+        alert("El personaje no esta en la basse de datos ");
+        resetGame();
+        
     }
 }
 
@@ -119,7 +128,9 @@ function verContenidoDB() {
             console.log("Fin de los datos");
             if (!isFinishGameCalled) {
                 finishGame(); // Llamar finishGame solo cuando todos los datos están listos y si no ha sido llamado antes
-                isFinishGameCalled = true; // Establecer la bandera a true para indicar que finishGame() ya fue llamado
+                isFinishGameCalled = true; 
+                
+                
             }
         }
     return valuesArray;

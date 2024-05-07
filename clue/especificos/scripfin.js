@@ -41,12 +41,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    setInterval(cambiarContenido, 5000);
+    setInterval(cambiarContenido, 15000);
 
     audioElement.play();
 
     
     setTimeout(function() {
         audioElement.pause();
-    }, 10000);
+    }, 60000);
 });

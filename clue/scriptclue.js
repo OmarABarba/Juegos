@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 500);
     }    
 
-    var intervalID = setInterval(cambiarParrafo, 2000);
+    var intervalID = setInterval(cambiarParrafo, 10000);
 
     botonSeleccion.addEventListener("click", function() {
         window.location.href = "especificos/historia.html";
